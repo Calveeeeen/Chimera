@@ -1,6 +1,7 @@
 // React Native Tab
 // https://aboutreact.com/react-native-tab/
 
+import CalendarStrip from 'react-native-calendar-strip';
 import * as React from 'react';
 import {
   TouchableOpacity,
@@ -14,6 +15,15 @@ const DailyPlanner = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>
+      <CalendarStrip
+      scrollable
+      style={{height:200, paddingTop: 20, paddingBottom: 10}}
+      calendarColor={'#3343CE'}
+      calendarHeaderStyle={{color: 'white'}}
+      dateNumberStyle={{color: 'white'}}
+      dateNameStyle={{color: 'white'}}
+      iconContainer={{flex: 0.1}}
+    />
         <View
           style={{
             flex: 1,
@@ -26,14 +36,14 @@ const DailyPlanner = ({ navigation }) => {
               textAlign: 'center',
               marginBottom: 16
             }}>
-            Home{'\n'}(You are on FirstPage)
+            Home{'\n'}(Welcome to Daily Planner)
           </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={
               () => navigation.navigate('SecondPage')
             }>
-            <Text>Go to settng Tab</Text>
+            <Text>Go to Fitness Tracker</Text>
           </TouchableOpacity>
         </View>
         <Text
@@ -64,6 +74,8 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 300,
     marginTop: 16,
+    
   },
+  container: { flex: 1 }
 });
 export default DailyPlanner;

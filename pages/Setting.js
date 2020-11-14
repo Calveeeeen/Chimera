@@ -27,14 +27,14 @@ const Setting = ({ navigation }) => {
               textAlign: 'center',
               marginBottom: 16
             }}>
-            Nutrition{'\n'}(You are on ThirdPage)
+            You are on the {'\n'}(Settings Page)
           </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={
-              () => navigation.navigate('SecondPage')
+              () => navigation.navigate('FirstPage')
             }>
-            <Text>Go to settng Tab</Text>
+            <Text>Go to Daily Planner</Text>
           </TouchableOpacity>
         </View>
         <Text

@@ -26,14 +26,14 @@ const Socials = ({ navigation }) => {
               textAlign: 'center',
               marginBottom: 16
             }}>
-            Home{'\n'}(You are on FourthPage)
+            You are on the {'\n'}(Socials Page)
           </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={
-              () => navigation.navigate('SecondPage')
+              () => navigation.navigate('FifthPage')
             }>
-            <Text>Go to settng Tab</Text>
+            <Text>Go to Settings</Text>
           </TouchableOpacity>
         </View>
         <Text

@@ -25,14 +25,14 @@ const FitnessTracker = ({ navigation }) => {
               textAlign: 'center',
               marginBottom: 16
             }}>
-            Setting{'\n'}(You are on SecondPage)
+            You are on the {'\n'}(Fitness Tracker Page)
           </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={
-              () => navigation.navigate('DailyPlanner')
+              () => navigation.navigate('ThirdPage')
             }>
-            <Text>Go to Home Tab</Text>
+            <Text>Go to Nutritional Tracker</Text>
           </TouchableOpacity>
         </View>
         <Text
