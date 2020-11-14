@@ -1,0 +1,6 @@
+module Pods_Chimera_ChimeraTests {
+  umbrella header "Pods-Chimera-ChimeraTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
