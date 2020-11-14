@@ -16,8 +16,11 @@ import {
   MaterialCommunityIcons
 from 'react-native-vector-icons/MaterialCommunityIcons';*/
 
-import FirstPage from './pages/FirstPage';
-import SecondPage from './pages/SecondPage';
+import DailyPlanner from './pages/DailyPlanner';
+import NutritionalTracker from './pages/NutritionalTracker';
+import FitnessTracker from './pages/FitnessTracker';
+import Socials from './pages/Socials';
+import Setting from './pages/Setting';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -42,9 +45,9 @@ function TabStack() {
       }}>
       <Tab.Screen
         name="FirstPage"
-        component={FirstPage}
+        component={DailyPlanner}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Daily Planner',
           // tabBarIcon: ({ color, size }) => (
           //   <MaterialCommunityIcons
           //       name="home"
@@ -55,9 +58,48 @@ function TabStack() {
         }}  />
       <Tab.Screen
         name="SecondPage"
-        component={SecondPage}
+        component={FitnessTracker}
         options={{
-          tabBarLabel: 'Setting',
+          tabBarLabel: 'Fitness Tracker',
+          // tabBarIcon: ({ color, size }) => (
+          //   <MaterialCommunityIcons
+          //       name="settings"
+          //       color={color}
+          //       size={size}
+          //     />
+          // ),
+        }} />
+        <Tab.Screen
+        name="ThirdPage"
+        component={NutritionalTracker}
+        options={{
+          tabBarLabel: 'Nutritional Tracker',
+          // tabBarIcon: ({ color, size }) => (
+          //   <MaterialCommunityIcons
+          //       name="settings"
+          //       color={color}
+          //       size={size}
+          //     />
+          // ),
+        }} />
+        <Tab.Screen
+        name="FourthPage"
+        component={Socials}
+        options={{
+          tabBarLabel: 'Socials',
+          // tabBarIcon: ({ color, size }) => (
+          //   <MaterialCommunityIcons
+          //       name="settings"
+          //       color={color}
+          //       size={size}
+          //     />
+          // ),
+        }} />
+        <Tab.Screen
+        name="FifthPage"
+        component={Setting}
+        options={{
+          tabBarLabel: 'Settings',
           // tabBarIcon: ({ color, size }) => (
           //   <MaterialCommunityIcons
           //       name="settings"
