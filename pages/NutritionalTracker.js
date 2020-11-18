@@ -2,56 +2,70 @@
 // https://aboutreact.com/react-native-tab/
 
 import * as React from 'react';
+import CalendarStrip from 'react-native-calendar-strip';
+
 import {
   TouchableOpacity,
   StyleSheet,
   View,
   Text,
-  SafeAreaView
+  SafeAreaView,
+  TextInput
 } from 'react-native';
 
 const NutritionalTracker = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
+    <CalendarStrip
+    scrollable
+    style={{height:100, paddingTop: 20, paddingBottom: 10}}
+    calendarColor={'#3343CE'}
+    calendarHeaderStyle={{color: 'white'}}
+    dateNumberStyle={{color: 'white'}}
+    dateNameStyle={{color: 'white'}}
+    iconContainer={{flex: 0.1}}
+  />
+
       <View style={{ flex: 1, padding: 16 }}>
         <View
           style={{
             flex: 1,
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
           }}>
           <Text
             style={{
-              fontSize: 25,
+              fontSize: 24,
               textAlign: 'center',
               marginBottom: 16
             }}>
-            You are on the {'\n'}(Nutritional Tracker Page)
+            Water Intake
+          </Text>
+
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: 'center',
+              marginBottom: 16
+            }}>
+          10 oz / 120 oz
+          </Text>
+          <Text
+            style={{
+              fontSize: 24,
+              textAlign: 'center',
+              marginBottom: 16
+            }}>
+            Calorie Intake
           </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={
               () => navigation.navigate('FourthPage')
             }>
-            <Text>Go to Socials</Text>
+            <Text>Set Goals</Text>
           </TouchableOpacity>
         </View>
-        <Text
-          style={{
-            fontSize: 18,
-            textAlign: 'center',
-            color: 'grey'
-          }}>
-          React Native Tab Navigation
-        </Text>
-        <Text
-          style={{
-            fontSize: 16,
-            textAlign: 'center',
-            color: 'grey'
-          }}>
-          www.aboutreact.com
-        </Text>
       </View>
     </SafeAreaView>
   );
