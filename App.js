@@ -1,135 +1,59 @@
-// React Native Tab
-// https://aboutreact.com/react-native-tab/
-import 'react-native-gesture-handler';
+// App.js
 
 import * as React from 'react';
-import {
-  NavigationContainer
-} from '@react-navigation/native';
-import {
-  createStackNavigator
-} from '@react-navigation/stack';
-import {
-  createMaterialTopTabNavigator
-} from '@react-navigation/material-top-tabs';
-/*import
-  MaterialCommunityIcons
-from 'react-native-vector-icons/MaterialCommunityIcons';*/
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import DailyPlanner from './pages/DailyPlanner';
-import NutritionalTracker from './pages/NutritionalTracker';
-import FitnessTracker from './pages/FitnessTracker';
-import Socials from './pages/Socials';
-import Setting from './pages/Setting';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
 
 const Stack = createStackNavigator();
-const Tab = createMaterialTopTabNavigator();
 
-function TabStack() {
+function MyStack() {
   return (
-    <Tab.Navigator
-      initialRouteName="Feed"
-      tabBarOptions={{
-        activeTintColor: '#FFFFFF',
-        inactiveTintColor: '#F8F8F8',
-        style: {
-          backgroundColor: '#633689',
+    <Stack.Navigator
+      initialRouteName="Signup"
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#3740FE',
         },
-        labelStyle: {
-          textAlign: 'center',
-        },
-        indicatorStyle: {
-          borderBottomColor: '#87B56A',
-          borderBottomWidth: 2,
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
         },
       }}>
-      <Tab.Screen
-        name="FirstPage"
-        component={DailyPlanner}
-        options={{
-          tabBarLabel: 'Daily Planner',
-          // tabBarIcon: ({ color, size }) => (
-          //   <MaterialCommunityIcons
-          //       name="home"
-          //       color={color}
-          //       size={size}
-          //     />
-          // ),
-        }}  />
-      <Tab.Screen
-        name="SecondPage"
-        component={FitnessTracker}
-        options={{
-          tabBarLabel: 'Fitness Tracker',
-          // tabBarIcon: ({ color, size }) => (
-          //   <MaterialCommunityIcons
-          //       name="settings"
-          //       color={color}
-          //       size={size}
-          //     />
-          // ),
-        }} />
-        <Tab.Screen
-        name="ThirdPage"
-        component={NutritionalTracker}
-        options={{
-          tabBarLabel: 'Nutritional Tracker',
-          // tabBarIcon: ({ color, size }) => (
-          //   <MaterialCommunityIcons
-          //       name="settings"
-          //       color={color}
-          //       size={size}
-          //     />
-          // ),
-        }} />
-        <Tab.Screen
-        name="FourthPage"
-        component={Socials}
-        options={{
-          tabBarLabel: 'Socials',
-          // tabBarIcon: ({ color, size }) => (
-          //   <MaterialCommunityIcons
-          //       name="settings"
-          //       color={color}
-          //       size={size}
-          //     />
-          // ),
-        }} />
-        <Tab.Screen
-        name="FifthPage"
-        component={Setting}
-        options={{
-          tabBarLabel: 'Settings',
-          // tabBarIcon: ({ color, size }) => (
-          //   <MaterialCommunityIcons
-          //       name="settings"
-          //       color={color}
-          //       size={size}
-          //     />
-          // ),
-        }} />
-    </Tab.Navigator>
+      <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={{ title: 'Signup' },
+      {headerLeft: null}}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={
+          {title: 'Login'},
+          {headerLeft: null}
+        }
+      />
+      <Stack.Screen
+       name="Chimera"
+       component={Dashboard}
+       options={
+         { title: 'Chimera' },
+         {headerLeft: null}
+       }
+      />
+    </Stack.Navigator>
   );
 }
 
-function App() {
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Settings"
-        screenOptions={{
-          headerStyle: { backgroundColor: '#633689' },
-          headerTintColor: '#fff',
-          headerTitleStyle: { fontWeight: 'bold' }
-        }}>
-        <Stack.Screen
-          name="TabStack"
-          component={TabStack}
-          options={{ title: 'Chimera' }}
-        />
-      </Stack.Navigator>
+      <MyStack />
     </NavigationContainer>
   );
 }
-
-export default App;
