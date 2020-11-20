@@ -2,16 +2,25 @@
 // https://aboutreact.com/react-native-tab/
 
 import * as React from 'react';
+import firebase from '../database/firebase';
 import {
   TouchableOpacity,
   StyleSheet,
   View,
   Text,
   SafeAreaView,
-  Image
+  Image,
+  Component
 } from 'react-native';
 
+
 const Socials = ({ navigation }) => {
+  getUser = () =>{
+    const user = firebase.auth().currentUser;
+    if (user) {
+     console.log('User email: ', user.email);
+    }
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
     <View style={styles.container}>
@@ -23,7 +32,7 @@ const Socials = ({ navigation }) => {
             <Text style={styles.info}>UX Designer / Mobile developer</Text>
             <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
 
-            <TouchableOpacity style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.buttonContainer} onPress={() => getUser()}>
               <Text>Instagram</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer}>

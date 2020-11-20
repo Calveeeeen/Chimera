@@ -26,8 +26,6 @@ export default class Login extends Component {
     if(this.state.email === '' && this.state.password === '') {
       Alert.alert('Enter details to signin!')
     } else {
-      this.props.navigation.navigate('Chimera')
-
       this.setState({
         isLoading: true,
       })
@@ -42,7 +40,7 @@ export default class Login extends Component {
           email: '',
           password: ''
         })
-        this.props.navigation.navigate('Dashboard')
+        this.props.navigation.navigate('Chimera')
       })
       .catch(error => this.setState({ errorMessage: error.message }))
     }
@@ -71,6 +69,7 @@ export default class Login extends Component {
           onChangeText={(val) => this.updateInputVal(val, 'password')}
           maxLength={15}
           secureTextEntry={true}
+          textContentType={'oneTimeCode'}
         />
         <Button
           color="#3740FE"

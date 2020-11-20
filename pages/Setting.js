@@ -2,6 +2,7 @@
 // https://aboutreact.com/react-native-tab/
 
 import * as React from 'react';
+import firebase from '../database/firebase';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -12,6 +13,7 @@ import {
 } from 'react-native';
 
 const Setting = ({ navigation }) => {
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>
@@ -32,9 +34,14 @@ const Setting = ({ navigation }) => {
           <TouchableOpacity
             style={styles.button}
             onPress={
-              () => navigation.navigate('FirstPage')
+              () => {
+                firebase.auth().signOut().then(() => {
+                  navigation.navigate('Login')
+                })
+                .catch(error => console.log(error))
+              }
             }>
-            <Text>Go to Daily Planner</Text>
+            <Text>Log Out</Text>
           </TouchableOpacity>
         </View>
         <Text

@@ -44,7 +44,7 @@ export default class Signup extends Component {
           email: '',
           password: ''
         })
-        this.props.navigation.navigate('Login')
+        this.props.navigation.navigate('Chimera')
       })
       .catch(error => this.setState({ errorMessage: error.message }))
     }
