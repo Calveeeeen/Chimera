@@ -1,7 +1,6 @@
 // React Native Tab
 // https://aboutreact.com/react-native-tab/
-
-import * as React from 'react';
+import React, { Component } from 'react';
 import CalendarStrip from 'react-native-calendar-strip';
 
 import {
@@ -13,8 +12,29 @@ import {
   TextInput
 } from 'react-native';
 
-const NutritionalTracker = ({ navigation }) => {
-  return (
+export default class NutritionalTracker extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      date:'',
+      water: '',
+      watergoal: '',
+      calories: '',
+      caloriegoal:''
+    }
+  }
+
+  updateInputVal = (val, prop) => {
+    const state = this.state;
+    state[prop] = val;
+    this.setState(state);
+  }
+
+
+
+  render() {
+    return (
     <SafeAreaView style={{ flex: 1 }}>
     <CalendarStrip
     scrollable
@@ -41,15 +61,28 @@ const NutritionalTracker = ({ navigation }) => {
             }}>
             Water Intake
           </Text>
-
-          <Text
+          <View
             style={{
-              fontSize: 18,
-              textAlign: 'center',
-              marginBottom: 16
+              flexDirection: 'row',
             }}>
-          10 oz / 120 oz
-          </Text>
+            <TextInput
+              style={styles.inputStyle}
+              placeholder=""
+              value={this.state.water}
+              onChangeText={(val) => this.updateInputVal(val, 'water')}
+              keyboardType={'numeric'}
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                textAlign: 'center',
+                marginBottom: 16
+              }}>
+                oz / {this.state.watergoal} oz
+            </Text>
+
+            </View>
+
           <Text
             style={{
               fontSize: 24,
@@ -61,14 +94,16 @@ const NutritionalTracker = ({ navigation }) => {
           <TouchableOpacity
             style={styles.button}
             onPress={
-              () => navigation.navigate('FourthPage')
+
+              () => this.props.navigation.navigate('FourthPage')
             }>
             <Text>Set Goals</Text>
           </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -79,5 +114,12 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 16,
   },
+  inputStyle: {
+    width: '10%',
+    marginBottom: 15,
+    alignSelf: "center",
+    borderColor: "#ccc",
+    borderBottomWidth: 1
+  },
+
 });
-export default NutritionalTracker;
