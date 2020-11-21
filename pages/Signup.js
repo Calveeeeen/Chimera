@@ -23,6 +23,15 @@ export default class Signup extends Component {
     this.setState(state);
   }
 
+  writeUserData = (name, email, imageUrl) => {
+    var user = firebase.auth().currentUser;
+  firebase.database().ref('users/' + user.uid).set({
+    username: name,
+    email: email,
+    profile_picture : imageUrl
+  });
+}
+
   registerUser = () => {
     if(this.state.email === '' && this.state.password === '') {
       Alert.alert('Enter details to signup!')
@@ -38,6 +47,7 @@ export default class Signup extends Component {
           displayName: this.state.displayName
         })
         console.log('User registered successfully!')
+        this.writeUserData(this.state.displayName, this.state.email, "Imageurl")
         this.setState({
           isLoading: false,
           displayName: '',

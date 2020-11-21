@@ -26,9 +26,6 @@ export default class Login extends Component {
     if(this.state.email === '' && this.state.password === '') {
       Alert.alert('Enter details to signin!')
     } else {
-      this.setState({
-        isLoading: true,
-      })
       firebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
