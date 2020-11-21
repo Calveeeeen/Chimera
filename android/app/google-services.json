@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "34877348301",
+    "firebase_url": "https://chimera-df4b1.firebaseio.com",
+    "project_id": "chimera-df4b1",
+    "storage_bucket": "chimera-df4b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34877348301:android:dc1c08aec7fa882fa4cc84",
+        "android_client_info": {
+          "package_name": "com.chimera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34877348301-taqtl10o82r9hdphsggoda0ev1hoifd3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg-28U5ulFgjTN-JMlVlodkjU_Az-6hYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34877348301-taqtl10o82r9hdphsggoda0ev1hoifd3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "34877348301-2mg1dsh0c1pgulfous03e303qc72nvtg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Chimera"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
