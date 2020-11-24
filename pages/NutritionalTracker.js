@@ -2,7 +2,7 @@
 // https://aboutreact.com/react-native-tab/
 import React, { Component } from 'react';
 import CalendarStrip from 'react-native-calendar-strip';
-
+import firebase from '../database/firebase';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -23,6 +23,33 @@ export default class NutritionalTracker extends Component {
       calories: '',
       caloriegoal:''
     }
+    this.pulldata();
+  }
+  componentDidMount() {
+   this.setState(this.state);
+  }
+  pulldata = () => {
+
+    const userid = firebase.auth().currentUser.uid;
+
+    var watergoalref = firebase.database().ref('users/' + userid + '/goals/water');
+    watergoalref.on('value', (snapshot) =>{
+    const data = snapshot.val();
+    this.state.watergoal = data
+    console.log("watergoal:" + data);
+    const state = this.state;
+    this.setState(state);
+    })
+
+    var caloriegoalref = firebase.database().ref('users/' + userid + '/goals/calories');
+    caloriegoalref.on('value', (snapshot) =>{
+    const data = snapshot.val();
+    this.state.caloriegoal = data
+    const state = this.state;
+    this.setState(state);
+    })
+
+
   }
 
   updateInputVal = (val, prop) => {
@@ -78,7 +105,7 @@ export default class NutritionalTracker extends Component {
                 textAlign: 'center',
                 marginBottom: 16
               }}>
-                oz / {this.state.watergoal} oz
+                oz / {this.state.watergoal.toString()} oz
             </Text>
 
             </View>
@@ -91,6 +118,27 @@ export default class NutritionalTracker extends Component {
             }}>
             Calorie Intake
           </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+            }}>
+            <TextInput
+              style={styles.inputStyle}
+              placeholder=""
+              value={this.state.calories}
+              onChangeText={(val) => this.updateInputVal(val, 'calories')}
+              keyboardType={'numeric'}
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                textAlign: 'center',
+                marginBottom: 16
+              }}>
+                cals / {this.state.caloriegoal.toString()} cals
+            </Text>
+
+            </View>
           <TouchableOpacity
             style={styles.button}
             onPress={

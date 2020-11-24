@@ -26,9 +26,16 @@ export default class Signup extends Component {
   writeUserData = (name, email, imageUrl) => {
     var user = firebase.auth().currentUser;
   firebase.database().ref('users/' + user.uid).set({
-    username: name,
-    email: email,
-    profile_picture : imageUrl
+    email : email,
+    "goals" : {
+      "calories" : 2000,
+      "water" : 100
+    },
+    profile_picture : imageUrl,
+    username : name
+
+
+
   });
 }
 
