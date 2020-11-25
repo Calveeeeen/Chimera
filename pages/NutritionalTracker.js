@@ -16,8 +16,9 @@ export default class NutritionalTracker extends Component {
 
   constructor() {
     super();
+    console.log("current date: " + new Date())
     this.state = {
-      date:'',
+      date: new Date(),
       water: '',
       watergoal: '',
       calories: '',
@@ -29,24 +30,53 @@ export default class NutritionalTracker extends Component {
    this.setState(this.state);
   }
   pulldata = () => {
-
     const userid = firebase.auth().currentUser.uid;
+    var date = this.getDateString()
+    var ref = firebase.database().ref('users/' + userid + '/log/' + date);
+    ref.once('value', (snapshot) =>{
+      if (snapshot.exists()){
 
-    var watergoalref = firebase.database().ref('users/' + userid + '/goals/water');
-    watergoalref.on('value', (snapshot) =>{
-    const data = snapshot.val();
-    this.state.watergoal = data
-    console.log("watergoal:" + data);
-    const state = this.state;
-    this.setState(state);
+        const data = snapshot.val();
+        console.log("Pulled user data water goal: " + data.goals.water)
+        this.state.watergoal = data.goals.water
+        this.state.caloriegoal = data.goals.calories
+        this.state.water = data.stats.water
+        this.state.calories= data.stats.calories
+        console.log("watergoal:" + data);
+        const state = this.state;
+        this.setState(state);
+
+        }
+      else {
+            this.createEntry()
+        }
+
     })
 
-    var caloriegoalref = firebase.database().ref('users/' + userid + '/goals/calories');
-    caloriegoalref.on('value', (snapshot) =>{
+
+  }
+  createEntry = () =>{
+
+    const userid = firebase.auth().currentUser.uid;
+    var date = this.getDateString()
+    var goalref = firebase.database().ref('users/' + userid + '/goals');
+    goalref.once('value', (snapshot) =>{
     const data = snapshot.val();
-    this.state.caloriegoal = data
-    const state = this.state;
-    this.setState(state);
+    var ref = firebase.database().ref('users/' + userid + '/log/' + date);
+    ref.set({
+      "goals" : {
+        "calories" : data.calories,
+        "exercise" : data.exercise,
+        "water" : data.water
+      },
+      "score" : 0,
+      "stats" : {
+        "calories" : 0,
+        "exercise": 0,
+        "water" : 0
+      }
+    }
+    );
     })
 
 
@@ -57,7 +87,25 @@ export default class NutritionalTracker extends Component {
     state[prop] = val;
     this.setState(state);
   }
+  updateDate = (date) => {
+    console.log("Selected Date: " + new Date(date))
+    const state = this.state;
+    state.date = new Date(date);
+    this.setState(state);
+    this.pulldata();
+  }
 
+  getDateString = () =>{
+      var date = this.state.date;
+      console.log("Debug Date: " + date)
+      var day = date.getDate();
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+
+      //Alert.alert(date + '-' + month + '-' + year);
+      // You can turn it in to your desired format
+      return month + '-' + day+ '-' + year;//format: dd-mm-yyyy;
+    }
 
 
   render() {
@@ -71,6 +119,8 @@ export default class NutritionalTracker extends Component {
     dateNumberStyle={{color: 'white'}}
     dateNameStyle={{color: 'white'}}
     iconContainer={{flex: 0.1}}
+    selectedDate={this.state.date}
+    onDateSelected={(date) => this.updateDate(date)}
   />
 
       <View style={{ flex: 1, padding: 16 }}>
@@ -94,8 +144,7 @@ export default class NutritionalTracker extends Component {
             }}>
             <TextInput
               style={styles.inputStyle}
-              placeholder=""
-              value={this.state.water}
+              value={this.state.water.toString()}
               onChangeText={(val) => this.updateInputVal(val, 'water')}
               keyboardType={'numeric'}
             />
@@ -124,8 +173,7 @@ export default class NutritionalTracker extends Component {
             }}>
             <TextInput
               style={styles.inputStyle}
-              placeholder=""
-              value={this.state.calories}
+              value={this.state.calories.toString()}
               onChangeText={(val) => this.updateInputVal(val, 'calories')}
               keyboardType={'numeric'}
             />

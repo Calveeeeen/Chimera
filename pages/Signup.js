@@ -29,6 +29,7 @@ export default class Signup extends Component {
     email : email,
     "goals" : {
       "calories" : 2000,
+      "exercise": 30,
       "water" : 100
     },
     profile_picture : imageUrl,

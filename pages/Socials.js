@@ -22,7 +22,8 @@ export default class Socials extends Component {
     this.state = {
       name: '',
       watergoal: '',
-      caloriegoal:''
+      caloriegoal:'',
+      exercisegoal:''
     }
     this.pulldata();
   }
@@ -58,6 +59,16 @@ export default class Socials extends Component {
 
     })
 
+    var exercisegoalref = firebase.database().ref('users/' + userid + '/goals/exercise');
+    exercisegoalref.on('value', (snapshot) =>{
+    const data = snapshot.val();
+    this.state.exercisegoal = data
+    const state = this.state;
+    this.setState(state);
+
+    })
+
+
 
   }
 
@@ -65,6 +76,7 @@ export default class Socials extends Component {
     var user = firebase.auth().currentUser;
     firebase.database().ref('users/' + user.uid + '/goals').set({
       "calories" : parseInt(this.state.caloriegoal),
+      "exercise" : parseInt(this.state.exercisegoal),
       "water" : parseInt(this.state.watergoal)
     });
 
