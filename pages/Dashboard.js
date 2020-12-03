@@ -19,7 +19,7 @@ from 'react-native-vector-icons/MaterialCommunityIcons';*/
 import DailyPlanner from './DailyPlanner';
 import NutritionalTracker from './NutritionalTracker';
 import FitnessTracker from './FitnessTracker';
-import Socials from './Socials';
+import Profile from './Profile';
 import Setting from './Setting';
 
 const Stack = createStackNavigator();
@@ -84,9 +84,9 @@ function TabStack() {
         }} />
         <Tab.Screen
         name="FourthPage"
-        component={Socials}
+        component={Profile}
         options={{
-          tabBarLabel: 'Socials',
+          tabBarLabel: 'Profile',
           // tabBarIcon: ({ color, size }) => (
           //   <MaterialCommunityIcons
           //       name="settings"

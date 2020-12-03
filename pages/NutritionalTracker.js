@@ -22,7 +22,8 @@ export default class NutritionalTracker extends Component {
       water: '',
       watergoal: '',
       calories: '',
-      caloriegoal:''
+      caloriegoal:'',
+      exercise:''
     }
     this.pulldata();
   }
@@ -42,6 +43,7 @@ export default class NutritionalTracker extends Component {
         this.state.caloriegoal = data.goals.calories
         this.state.water = data.stats.water
         this.state.calories= data.stats.calories
+        this.state.exercise= data.stats.exercise
         console.log("watergoal:" + data);
         const state = this.state;
         this.setState(state);
@@ -79,6 +81,17 @@ export default class NutritionalTracker extends Component {
     );
     })
 
+
+  }
+
+  updatedata = () =>{
+    var user = firebase.auth().currentUser;
+    const userid = firebase.auth().currentUser.uid;
+    var date = this.getDateString()
+    firebase.database().ref('users/' + userid + '/log/' + date + "/stats/water").set(
+      this.state.water);
+      firebase.database().ref('users/' + userid + '/log/' + date + "/stats/calories").set(
+        this.state.calories);
 
   }
 
@@ -156,7 +169,9 @@ export default class NutritionalTracker extends Component {
               }}>
                 oz / {this.state.watergoal.toString()} oz
             </Text>
-
+            <TouchableOpacity style={styles.updateButton} onPress={() => this.updatedata()}>
+              <Text>Update</Text>
+            </TouchableOpacity>
             </View>
 
           <Text
@@ -185,6 +200,9 @@ export default class NutritionalTracker extends Component {
               }}>
                 cals / {this.state.caloriegoal.toString()} cals
             </Text>
+            <TouchableOpacity style={styles.updateButton} onPress={() => this.updatedata()}>
+              <Text>Update</Text>
+            </TouchableOpacity>
 
             </View>
           <TouchableOpacity
@@ -203,6 +221,13 @@ export default class NutritionalTracker extends Component {
 }
 
 const styles = StyleSheet.create({
+  updateButton:{
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    marginLeft:20,
+    height: 20,
+    width: 100
+  },
   button: {
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
